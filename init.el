@@ -2,7 +2,9 @@
 ;;; Commentary:
 ;;; TODO: have a better description including minimum requirements
 ;;; TODO: make paths using user-emacs-directory
-;;; TODO: make this org and refactor more
+;;; TODO: make this org and refactor
+;;; TODO: fix yasnippet to be more friendly in auto-complete-mode
+;;; TODO: optimize load-time
 ;;; This is my personal Emacs configuration
 ;;; Code:
 
@@ -441,6 +443,10 @@
 
 (use-package forge
   :after magit)
+
+(use-package magit-todos
+  :after magit
+  :hook (magit-mode . magit-todos-mode))
 
 (use-package skewer-mode
   :hook js2-mode (css-mode . skewer-css-mode) (html-mode . skewer-html-mode))

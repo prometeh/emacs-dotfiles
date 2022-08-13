@@ -66,6 +66,7 @@
 		    :font "Fira Code Retina"
 		    :height 101)
 (load-theme 'modus-vivendi)		; set the theme to modus-vivendi
+(column-number-mode 1)			; show the column number at modeline
 
 ;; having last 25 files opened with emacs
 ;; (recentf-mode 1)

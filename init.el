@@ -67,6 +67,8 @@
 		    :height 101)
 (load-theme 'modus-vivendi)		; set the theme to modus-vivendi
 (column-number-mode 1)			; show the column number at modeline
+; auto-refresh all buffers when files have changed on disk
+(global-auto-revert-mode t)
 
 ;; make the links clickable
 (global-goto-address-mode 1)

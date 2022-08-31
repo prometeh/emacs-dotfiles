@@ -105,11 +105,11 @@
 (defvar bootstrap-version)
 (let ((bootstrap-file
        (expand-file-name "straight/repos/straight.el/bootstrap.el" "~/.config/emacs/.cache/var/"))
-      (bootstrap-version 5))
+      (bootstrap-version 6))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
         (url-retrieve-synchronously
-         "https://raw.githubusercontent.com/raxod502/straight.el/develop/install.el"
+         "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
          'silent 'inhibit-cookies)
       (goto-char (point-max))
       (eval-print-last-sexp)))
@@ -532,7 +532,7 @@
   :mode (("readme\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-command "multimarkdown"))
+  :init (setq markdown-command "marked"))
 
 (use-package rust-mode
   :hook
@@ -540,5 +540,7 @@
   :config
   (add-hook 'rust-mode-hook
             (lambda () (setq-local devdocs-current-docs '("rust")))))
+
+(use-package yaml-mode)
 
 ;;; init.el ends here

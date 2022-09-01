@@ -507,7 +507,7 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.js\\'" . js2-mode))
   (add-hook 'js2-mode-hook
-            (lambda () (setq-local devdocs-current-docs '("javascript" "react" "redux" "react_router" "express" "node" "tailwindcss" "dom" "mongoose"))))
+            (lambda () (setq-local devdocs-current-docs '("javascript" "react" "redux" "react_router" "express" "node" "tailwindcss" "dom" "mongoose" "axios"))))
   :custom
   (js-indent-level 2)
   (js2-basic-offset 2)

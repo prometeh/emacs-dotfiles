@@ -323,15 +323,6 @@
   :custom
   (dabbrev-ignored-buffer-regexps '("\\.\\(?:pdf\\|jpe?g\\|png\\)\\'")))
 
-(use-package corfu-doc
-  :straight (corfu-doc :type git :host github :repo "galeo/corfu-doc")
-  :after corfu
-  :hook (corfu-mode . corfu-doc-mode)
-  :custom
-  (corfu-doc-delay 0.5)
-  (corfu-doc-max-width 70)
-  (corfu-doc-max-height 20))
-
 (use-package helpful
   :config
   (global-set-key (kbd "C-h f") #'helpful-callable)

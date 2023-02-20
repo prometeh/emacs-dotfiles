@@ -509,6 +509,8 @@
 (use-package rjsx-mode)
 
 (use-package typescript-mode
+  :mode (("\\.ts\\'" . typescript-mode)
+	 ("\\.tsx\\'" . typescript-mode))
   :config
   (add-hook 'typescript-mode-hook
             (lambda () (setq-local devdocs-current-docs '("typescript")))))

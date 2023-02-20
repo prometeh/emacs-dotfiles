@@ -290,7 +290,9 @@
 (use-package corfu
   :custom
   (tab-always-indent 'complete)
+  (corfu-popupinfo-mode 1)
   (corfu-auto t)
+  (corfu-separator ?\s)
   (corfu-scroll-margin 5)
   (corfu-cycle t)
   (corfu-preview-current nil)  		; default == 'insert

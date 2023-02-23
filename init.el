@@ -290,6 +290,10 @@
   (apheleia-global-mode +1))
 
 (use-package corfu
+    :straight (corfu :files (:defaults "extensions/*")
+		     :includes (corfu-directory))
+  :hook
+  (corfu-popupinfo-mode)
   :custom
   (tab-always-indent 'complete)
   (corfu-popupinfo-mode 1)

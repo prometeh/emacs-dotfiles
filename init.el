@@ -200,6 +200,7 @@
   (marginalia-mode))
 
 (use-package fira-code-mode
+  :if (display-graphic-p)
   :delight
   :custom (fira-code-mode-disabled-ligatures '("[]" "#{" "#(" "#_" "#_(" "x"))
   :hook prog-mode)

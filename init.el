@@ -362,7 +362,7 @@
 (use-package consult-yasnippet
   :after (consult yasnippet))
 
-(use-package react-snippets)
+(use-package js-react-redux-yasnippets)
 
 (use-package yasnippet-snippets)
 

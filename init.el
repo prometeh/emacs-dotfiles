@@ -287,6 +287,8 @@
 (use-package apheleia
   :delight
   :config
+  (setf (alist-get 'rustfmt apheleia-formatters)
+      '("rustfmt" "--quiet" "--emit" "stdout" "--edition" "2021"))
   (apheleia-global-mode +1))
 
 (use-package corfu

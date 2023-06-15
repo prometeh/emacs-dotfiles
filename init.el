@@ -193,6 +193,11 @@
 
 (use-package tree-sitter-langs)
 
+(use-package pdf-tools
+  :magic ("%PDF" . pdf-view-mode)
+  :config
+  (pdf-tools-install :no-query))
+
 (use-package marginalia
   :custom
   (marginalia-align 'right)

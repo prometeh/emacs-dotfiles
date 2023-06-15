@@ -524,6 +524,8 @@
   :hook
   (prog-mode . rainbow-delimiters-mode))
 
+(use-package dockerfile-mode)
+
 (use-package mhtml-mode
   :config
   (add-hook 'mhtml-mode-hook

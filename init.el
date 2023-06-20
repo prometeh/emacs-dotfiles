@@ -63,7 +63,7 @@
 ;; (global-linum-mode 1)                          ; set line numbers on globally
 (global-hl-line-mode 1)                        ; set the line highlighted
 (set-face-attribute 'default nil               ; set the font to Fira
-		    :font "Fira Code Retina"
+		    :font "FiraCode Nerd Font"
 		    :height 101)
 (load-theme 'modus-vivendi)		; set the theme to modus-vivendi
 (column-number-mode 1)			; show the column number at modeline
@@ -192,6 +192,11 @@
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (use-package tree-sitter-langs)
+
+(use-package pdf-tools
+  :magic ("%PDF" . pdf-view-mode)
+  :config
+  (pdf-tools-install :no-query))
 
 (use-package marginalia
   :custom
@@ -520,6 +525,8 @@
 (use-package rainbow-delimiters
   :hook
   (prog-mode . rainbow-delimiters-mode))
+
+(use-package dockerfile-mode)
 
 (use-package mhtml-mode
   :config

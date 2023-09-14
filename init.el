@@ -14,7 +14,7 @@
 ;; Maximum number of bytes to read from a subprocess in a single chuck
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 ;; Set the eln-cache path inside .cache directory
-;(setq native-comp-eln-load-path '("~/.config/emacs/.cache/temp/eln-cache/")); "/usr/lib/emacs/28.1/native-lisp/"))
+                                        ;(setq native-comp-eln-load-path '("~/.config/emacs/.cache/temp/eln-cache/")); "/usr/lib/emacs/28.1/native-lisp/"))
 
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook
@@ -26,8 +26,8 @@
                      gcs-done)))
 
 ;; Change the user-emacs-directory to keep unwanted things out of ~/.config/emacs
-; (setq user-emacs-directory (expand-file-name "~/.config/emacs/.cache/")
-;       url-history-file (expand-file-name "url/history" user-emacs-directory))
+                                        ; (setq user-emacs-directory (expand-file-name "~/.config/emacs/.cache/")
+                                        ;       url-history-file (expand-file-name "url/history" user-emacs-directory))
 
 ;; Take the "customize interface" generated lines out of here
 (setq custom-file
@@ -63,11 +63,11 @@
 ;; (global-linum-mode 1)                          ; set line numbers on globally
 (global-hl-line-mode 1)                        ; set the line highlighted
 (set-face-attribute 'default nil               ; set the font to Fira
-		    :font "Fira Code Retina"
-		    :height 101)
+                    :font "Fira Code Retina"
+                    :height 101)
 (load-theme 'modus-vivendi)		; set the theme to modus-vivendi
 (column-number-mode 1)			; show the column number at modeline
-; auto-refresh all buffers when files have changed on disk
+                                        ; auto-refresh all buffers when files have changed on disk
 (global-auto-revert-mode t)
 
 ;; make the links clickable
@@ -79,7 +79,7 @@
 ;; Write backup files to one directory
 (setq backup-directory-alist
       `(("." . ,(expand-file-name
-		 (concat user-emacs-directory "backups")))))
+                 (concat user-emacs-directory "backups")))))
 
 ;; Make backups of files, even when they're in version control
 (setq vc-make-backup-files t)
@@ -117,7 +117,7 @@
 ;; setting use-package to use straight
 (setq straight-use-package-by-default t)
 ;; keeping emacs away from package in favor of straight
-;(setq package-enable-at-startup nil)
+                                        ;(setq package-enable-at-startup nil)
 ;; install 'use-package' with straight
 (straight-use-package 'use-package)
 
@@ -146,11 +146,11 @@
 
 
 (setq auto-save-file-name-transforms
-       `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
+      `((".*" ,(no-littering-expand-var-file-name "auto-save/") t)))
 
 ;; Appearance
- (use-package doom-modeline
-   :hook (after-init . doom-modeline-mode))
+(use-package doom-modeline
+  :hook (after-init . doom-modeline-mode))
 
 (use-package beacon
   :config
@@ -212,7 +212,7 @@
 
 (use-package consult
   :bind (
-	 ("C-<backspace>" . consult-recent-file)
+	       ("C-<backspace>" . consult-recent-file)
          ("C-x b" . consult-buffer)
          ("M-y" . consult-yank-pop)
          ("<help> a" . consult-apropos)
@@ -223,7 +223,6 @@
          ("M-g i" . consult-imenu)
          ("M-s d" . consult-find)
          ("M-s r" . consult-ripgrep)
-         
          ("M-s e" . consult-isearch-history)))
 
 (use-package embark
@@ -247,7 +246,7 @@
 
 (use-package vertico
   :straight (vertico :files (:defaults "extensions/*")
-		     :includes (vertico-directory))
+                     :includes (vertico-directory))
   ;; More convenient directory navigation commands
   :bind (:map vertico-map
               ("RET" . vertico-directory-enter)
@@ -270,8 +269,7 @@
   :init
   (setq completion-styles '(orderless partial-completion basic)
         completion-category-defaults nil
-	completion-category-overrides '((file (styles . (partial-completion))))))
-
+        completion-category-overrides '((file (styles . (partial-completion))))))
 
 (use-package emacs
   :init
@@ -293,12 +291,13 @@
   :delight
   :config
   (setf (alist-get 'rustfmt apheleia-formatters)
-      '("rustfmt" "--quiet" "--emit" "stdout" "--edition" "2021"))
+				'("rustfmt" "--quiet" "--emit" "stdout" "--edition" "2021"))
+	(setq-default indent-tabs-mode nil)
   (apheleia-global-mode +1))
 
 (use-package corfu
-    :straight (corfu :files (:defaults "extensions/*")
-		     :includes (corfu-directory))
+  :straight (corfu :files (:defaults "extensions/*")
+                   :includes (corfu-directory))
   :hook
   (corfu-popupinfo-mode)
   :custom
@@ -308,7 +307,7 @@
   (corfu-separator ?\s)
   (corfu-scroll-margin 5)
   (corfu-cycle t)
-  (corfu-preview-current nil)  		; default == 'insert
+  (corfu-preview-current nil)  ; default == 'insert
   :init
   (global-corfu-mode))
 
@@ -322,7 +321,7 @@
          ("C-c p a" . cape-abbrev)
          ("C-c p i" . cape-ispell)
          ("C-c p l" . cape-line)
-	 )
+	       )
   :init
   (add-to-list 'completion-at-point-functions #'cape-file)
   (add-to-list 'completion-at-point-functions #'cape-dabbrev)
@@ -452,23 +451,24 @@
   ;; Optionally configure the cape-capf-buster.
   (setq-local completion-at-point-functions (list (cape-capf-buster #'lsp-completion-at-point)))
   :hook (((mhtml-mode
-	  css-mode
-          java-mode       ; eclipse-jdtls
-          js-mode         ; ts-ls (tsserver wrapper)
-          js-jsx-mode     ; ts-ls (tsserver wrapper)
-          typescript-mode ; ts-ls (tsserver wrapper)
-          python-mode     ; pyright
-	  rust-mode       ; rust-analyzer
-          web-mode        ; vue
-          ) . lsp-deferred)
-	 (lsp-completion-mode . my/lsp-mode-setup-completion))
+           css-mode
+           java-mode       ; eclipse-jdtls
+           js-mode         ; ts-ls (tsserver wrapper)
+           js-jsx-mode     ; ts-ls (tsserver wrapper)
+           typescript-mode ; ts-ls (tsserver wrapper)
+           python-mode     ; pyright
+           rust-mode       ; rust-analyzer
+           web-mode        ; vue
+           dockerfile-mode ; docker
+           ) . lsp-deferred)
+         (lsp-completion-mode . my/lsp-mode-setup-completion))
   :commands lsp
   :custom (lsp-completion-provider :none) ; we use corfu
   :config
   (setq lsp-auto-guess-root t)
   (setq lsp-log-io nil)
   (setenv "TSSERVER_LOG_FILE"
-	  (expand-file-name ".cache/temp/lsp-log/tsserver.log" user-emacs-directory))
+          (expand-file-name ".cache/temp/lsp-log/tsserver.log" user-emacs-directory))
   (setq lsp-restart 'auto-restart)
   (setq lsp-idle-delay 0.5))
 
@@ -477,7 +477,7 @@
   :config
   (setq lsp-ui-doc-header t)
   (setq lsp-ui-doc-include-signature t)
-;  (setq lsp-ui-doc-border (face-foreground 'default))
+                                        ;  (setq lsp-ui-doc-border (face-foreground 'default))
   (setq lsp-ui-sideline-show-code-actions t)
   (setq lsp-ui-sideline-delay 0.05))
 
@@ -531,7 +531,7 @@
 (use-package mhtml-mode
   :config
   (add-hook 'mhtml-mode-hook
-          (lambda () (setq-local devdocs-current-docs '("html" "tailwindcss"))))
+            (lambda () (setq-local devdocs-current-docs '("html" "tailwindcss"))))
   :bind
   ([f5] . sgml-validate))
 
@@ -563,21 +563,23 @@
   (js-indent-level 2)
   (js2-basic-offset 2)
   (js2-highlight-level 3)
-  ;; (js-indent-level 2)
+  (tab-width 2)
   )
 
 (use-package rjsx-mode)
 
 (use-package typescript-mode
   :mode (("\\.ts\\'" . typescript-mode)
-	 ("\\.tsx\\'" . typescript-mode))
+	       ("\\.tsx\\'" . typescript-mode))
+  :custom
+  (typescript-indent-level 2)
   :config
   (add-hook 'typescript-mode-hook
             (lambda () (setq-local devdocs-current-docs '("typescript")))))
 
 (use-package emmet-mode
   :init
-  (setq emmet-move-cursor-between-quotes t) 
+  (setq emmet-move-cursor-between-quotes t)
   :hook
   (mhtml-mode css-mode web-mode js-mode))
 

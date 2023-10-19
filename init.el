@@ -198,6 +198,13 @@
   :config
   (pdf-tools-install :no-query))
 
+(use-package pdf-view-restore
+  :after pdf-tools
+  :config
+  (setq pdf-view-restore-filename
+        (expand-file-name ".cache/var/pdf-view-restore" user-emacs-directory))
+  (add-hook 'pdf-view-mode-hook 'pdf-view-restore-mode))
+
 (use-package marginalia
   :custom
   (marginalia-align 'right)

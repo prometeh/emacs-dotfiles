@@ -156,8 +156,7 @@
   :config
   (beacon-mode 1))
 
-(use-package all-the-icons
-  :if (display-graphic-p))
+(use-package all-the-icons)
 
 (use-package all-the-icons-completion
   :after (marginalia all-the-icons)

@@ -589,7 +589,7 @@
   :hook
   (mhtml-mode css-mode web-mode js-mode))
 
-(use-package markdown-mode
+(use-package markdown-mode              ; Make sure that you have marked (npm i -g marked)
   :mode (("readme\\.md\\'" . gfm-mode)
          ("\\.md\\'" . markdown-mode)
          ("\\.markdown\\'" . markdown-mode))

@@ -124,6 +124,9 @@
 
 ;;; Packages
 
+
+;; Use of more recent built-in pkgs
+(use-package org)
 ;; Use no-littering to automatically set common paths
 ;; to the new user-emacs-directory
 (setq no-littering-etc-directory

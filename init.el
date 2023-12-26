@@ -182,6 +182,11 @@
   (add-hook 'org-mode-hook #'org-modern-mode)
   (add-hook 'org-agenda-finalize-hook #'org-modern-agenda))
 
+(use-package visual-fill-column
+  :hook (org-mode . visual-fill-column-mode)
+  :custom
+  (visual-fill-column-center-text t))
+
 
 ;; Utilities
 (use-package multiple-cursors

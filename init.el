@@ -127,8 +127,18 @@
 
 ;; Use of more recent built-in pkgs
 (use-package org
+  :config
+  (require 'org-habit)
+  (add-to-list 'org-modules 'org-habit)
+  (setq org-habit-graph-column 60)
   :custom
-  (org-ellipsis " 🔻"))
+  (org-ellipsis " 🔻")
+  (org-agenda-files  '("~/Documents/org_files/"
+                       "~/Documents/org_files/roam/"
+                       "~/Documents/org_files/gtd/"))
+  (org-agenda-start-with-log-mode t)
+  (org-log-done 'time)
+  (org-log-ino-drawer t))
 
 
 ;; Use no-littering to automatically set common paths

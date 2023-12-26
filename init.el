@@ -36,9 +36,9 @@
 (load custom-file t)
 
 ;; Info
-(setq user-full-name "Ushita Mohammadi")
+(setq user-full-name "Ushita Momenabadi")
 (setq user-mail-address
-      "ushita.mohammadi@gmail.com")
+      "contact@ushita.dev")
 
 ;; Aspell, a spell-checker
 (setq ispell-program-name "aspell")

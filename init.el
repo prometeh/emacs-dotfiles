@@ -36,9 +36,9 @@
 (load custom-file t)
 
 ;; Info
-(setq user-full-name "Ushita Mohammadi")
+(setq user-full-name "Ushita Momenabadi")
 (setq user-mail-address
-      "ushita.mohammadi@gmail.com")
+      "contact@ushita.dev")
 
 ;; Aspell, a spell-checker
 (setq ispell-program-name "aspell")
@@ -126,7 +126,21 @@
 
 
 ;; Use of more recent built-in pkgs
-(use-package org)
+(use-package org
+  :config
+  (require 'org-habit)
+  (add-to-list 'org-modules 'org-habit)
+  (setq org-habit-graph-column 60)
+  :custom
+  (org-ellipsis " 🔻")
+  (org-agenda-files  '("~/Documents/org_files/"
+                       "~/Documents/org_files/roam/"
+                       "~/Documents/org_files/gtd/"))
+  (org-agenda-start-with-log-mode t)
+  (org-log-done 'time)
+  (org-log-ino-drawer t))
+
+
 ;; Use no-littering to automatically set common paths
 ;; to the new user-emacs-directory
 (setq no-littering-etc-directory
@@ -194,7 +208,7 @@
 
 (use-package org-roam
   :custom
-  (org-roam-directory (file-truename "~/Documents/org_files/"))
+  (org-roam-directory (file-truename "~/Documents/org_files/roam/"))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n g" . org-roam-graph)
@@ -330,10 +344,6 @@
   (setq tab-always-indent 'complete))
 
 (use-package delight)
-
-(use-package zenity-color-picker ;; you need to have zenity installed
-  :bind
-  ("C-c c c" . zenity-cp-color-at-point-dwim))
 
 (use-package apheleia
   :delight

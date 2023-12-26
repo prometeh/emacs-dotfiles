@@ -138,7 +138,9 @@
                        "~/Documents/org_files/gtd/"))
   (org-agenda-start-with-log-mode t)
   (org-log-done 'time)
-  (org-log-ino-drawer t))
+  (org-log-ino-drawer t)
+  :bind (("C-c c" . org-capture)
+         ("C-c a" . org-agenda)))
 
 
 ;; Use no-littering to automatically set common paths

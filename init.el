@@ -334,10 +334,6 @@
 
 (use-package delight)
 
-(use-package zenity-color-picker ;; you need to have zenity installed
-  :bind
-  ("C-c c c" . zenity-cp-color-at-point-dwim))
-
 (use-package apheleia
   :delight
   :config

@@ -133,12 +133,16 @@
   (setq org-habit-graph-column 60)
   :custom
   (org-ellipsis " 🔻")
-  (org-agenda-files  '("~/Documents/org_files/"
-                       "~/Documents/org_files/roam/"
-                       "~/Documents/org_files/gtd/"))
+  (org-agenda-files (directory-files-recursively
+                     "~/Documents/org_files/" "\\.org"))
   (org-agenda-start-with-log-mode t)
   (org-log-done 'time)
-  (org-log-ino-drawer t)
+  (org-log-into-drawer t)
+  (org-refile-targets '("archive.org" :maxlevel . 2))
+  ;; Save org buffers after refiling
+  (advice-add 'org-refile :after 'org-save-all-org-buffers)
+  (org-todo-keywords
+   '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")))
   :bind (("C-c c" . org-capture)
          ("C-c a" . org-agenda)))
 

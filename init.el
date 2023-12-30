@@ -215,13 +215,30 @@
 (use-package org-roam
   :custom
   (org-roam-directory (file-truename "~/Documents/org_files/roam/"))
+  (org-roam-completion-everywhere t)
+  (org-roam-dailies-capture-templates
+   '(("d" "default" entry "* %<%I:%M %p>: %?"
+      :if-new (file+head "%<%Y-%m-%d>.org" "#+title: %<%Y-%m-%d>\n"))))
+  (org-roam-capture-templates
+   '(("d" "default" plain
+      "%?"
+      :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+category: ${title}")
+      :unnarrowed t)
+     ("c" "capture" entry
+      "* TODO ${title}%?\n * captured %U\n"
+      :target (file+head "~/Documents/org_files/roam/gtd/tray/%<%Y%m%d%H%M%S>-${slug}.org"
+                         "#+title: ${title}\n#+category: stuff\n#+filetags: stuff\n#+TODO: TODO(t) NEXT(n) HABIT(h) | DONE(d) PROJECT(p) SOMEDAY(s) REFERENCE(r)")
+      :unnarrowed t)
+     ))
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
-         ("C-c n g" . org-roam-graph)
+         ("C-c n g" . org-roam-ui-mode)
          ("C-c n i" . org-roam-node-insert)
          ("C-c n c" . org-roam-capture)
          ;; Dailies
          ("C-c n j" . org-roam-dailies-capture-today))
+  :bind-keymap
+  ("C-c n d" . org-roam-dailies-map)
   :config
   ;; If you're using a vertical completion framework, you might want a more informative completion interface
   (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))

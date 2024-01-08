@@ -132,17 +132,25 @@
   (add-to-list 'org-modules 'org-habit)
   (setq org-habit-graph-column 60)
   :custom
+  (org-directory "~/Documents/org_files/")
+  (org-default-notes-file (concat org-directory "notes.org"))
   (org-ellipsis " 🔻")
   (org-agenda-files (directory-files-recursively
                      "~/Documents/org_files/" "\\.org"))
   (org-agenda-start-with-log-mode t)
   (org-log-done 'time)
   (org-log-into-drawer t)
-  (org-refile-targets '("archive.org" :maxlevel . 2))
+  (org-refile-targets '("archive.org" :maxlevel . 1))
   ;; Save org buffers after refiling
   (advice-add 'org-refile :after 'org-save-all-org-buffers)
   (org-todo-keywords
    '((sequence "TODO(t)" "NEXT(n)" "|" "DONE(d)")))
+  (org-capture-templates '(
+                           ("t" "Todo" entry (file+headline "~/Documents/org_files/tasks.org" "Tasks")
+                            "* TODO %?\n %i\n %a")
+                           ("j" "Journal" entry (file+datetree "~/Documents/org_files/journal.org")
+                            "* %?\nEntered on %U\n  %i\n  %a")
+                           ))
   :bind (("C-c c" . org-capture)
          ("C-c a" . org-agenda)))
 
@@ -228,6 +236,10 @@
       "* TODO ${title}%?\n * captured %U\n"
       :target (file+head "~/Documents/org_files/roam/gtd/tray/%<%Y%m%d%H%M%S>-${slug}.org"
                          "#+title: ${title}\n#+category: stuff\n#+filetags: stuff\n#+TODO: TODO(t) NEXT(n) HABIT(h) | DONE(d) PROJECT(p) SOMEDAY(s) REFERENCE(r)")
+      :unnarrowed t)
+     ("l" "log" entry
+      "* ${title}%?\n * captured %U\n"
+      :target (file+head "~/Documents/org_files/roam//log.org" "#+title: ${title}\n#+category: log\n#+filetags: log\n")
       :unnarrowed t)
      ))
   :bind (("C-c n l" . org-roam-buffer-toggle)

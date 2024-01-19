@@ -208,8 +208,13 @@
 (use-package org-modern
   :config
   (add-hook 'org-mode-hook #'org-modern-mode)
-  (add-hook 'org-agenda-finalize-hook #'org-modern-agenda))
-
+  (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+  (custom-set-faces
+   '(org-modern-label ((t (:box (:line-width (-1 . -1) :color "#000000")
+                                :underline nil
+                                :weight regular
+                                :width condensed))))
+   ))
 
 ;; Utilities
 (use-package multiple-cursors

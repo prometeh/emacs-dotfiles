@@ -74,7 +74,10 @@
 (global-goto-address-mode 1)
 
 ;; remember the last cursor position
-;;(save-place-mode 1)
+(save-place-mode 1)
+
+;; make the backup files functionality to use copying instead of renaming
+(setq backup-by-copying t)
 
 ;; Write backup files to one directory
 (setq backup-directory-alist

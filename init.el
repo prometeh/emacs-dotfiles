@@ -281,6 +281,8 @@
 (use-package tree-sitter
   :init
   (global-tree-sitter-mode)
+  :custom
+  (treesit-extra-load-path (list (concat user-emacs-directory ".cache/var/straight/build/tree-sitter-langs/bin")))
   :config
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 

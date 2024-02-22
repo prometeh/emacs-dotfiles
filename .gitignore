@@ -1,3 +1,5 @@
 /.cache/
 /eln-cache/
 /backups/
+/ellama-sessions/
+/tree-sitter/

@@ -220,6 +220,19 @@
    ))
 
 ;; Utilities
+(use-package ellama                     ; ai in emacs, you need to have the
+  :init                                 ; ollama plus the models in the config
+  (require 'llm-ollama)                 ; (suggestion: use container)
+  (setopt ellama-provider
+          (make-llm-ollama
+           :chat-model "codellama:latest"
+           :embedding-model "codellama2:latest"))
+  (setopt ellama-naming-provider
+	  (make-llm-ollama
+	   :chat-model "codellama:latest"
+	   :embedding-model "codellama:latest"))
+  (setopt ellama-naming-scheme 'ellama-generate-name-by-llm))
+
 (use-package multiple-cursors
   :config
   (require 'multiple-cursors)

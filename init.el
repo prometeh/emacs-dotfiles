@@ -167,6 +167,8 @@
 (use-package no-littering)
 ;; having last 25 files opened with emacs
 (recentf-mode 1)
+(add-to-list 'recentf-exclude
+             (recentf-expand-file-name "~/Documents/org_files/"))
 (setq recentf-max-menu-items 25)
 (setq recentf-max-saved-items 25)
 (add-to-list 'recentf-exclude no-littering-var-directory)

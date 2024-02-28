@@ -570,7 +570,9 @@
    ("M-e" . dirvish-emerge-menu)
    ("M-j" . dirvish-fd-jump)))
 
-(use-package projectile)
+(use-package projectile
+  :bind
+  ("C-x p t" . projectile-run-term))
 
 (use-package cargo)
 

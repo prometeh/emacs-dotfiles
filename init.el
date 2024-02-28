@@ -62,9 +62,9 @@
 (set-fringe-mode 10)                           ; give some breathing room
 ;; (global-linum-mode 1)                          ; set line numbers on globally
 (global-hl-line-mode 1)                        ; set the line highlighted
-(set-face-attribute 'default nil               ; set the font to Fira
-                    :font "Fira Code Retina"
-                    :height 101)
+(add-to-list 'default-frame-alist
+             '(font . "FiraCode Nerd Font Ret")) ; dont forget to add the nerd fonts
+
 (load-theme 'modus-vivendi)		; set the theme to modus-vivendi
 (column-number-mode 1)			; show the column number at modeline
                                         ; auto-refresh all buffers when files have changed on disk

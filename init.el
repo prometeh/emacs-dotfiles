@@ -63,7 +63,7 @@
 ;; (global-linum-mode 1)                          ; set line numbers on globally
 (global-hl-line-mode 1)                        ; set the line highlighted
 (add-to-list 'default-frame-alist
-             '(font . "FiraCode Nerd Font Ret")) ; dont forget to add the nerd fonts
+             '(font . "FiraCode Nerd Font Mono")) ; dont forget to add the nerd fonts
 
 (load-theme 'modus-vivendi)		; set the theme to modus-vivendi
 (column-number-mode 1)			; show the column number at modeline
@@ -324,7 +324,7 @@
 
 (use-package consult
   :bind (
-	       ("C-<backspace>" . consult-recent-file)
+	 ("C-<backspace>" . consult-recent-file)
          ("C-x b" . consult-buffer)
          ("M-y" . consult-yank-pop)
          ("<help> a" . consult-apropos)
@@ -404,8 +404,8 @@
   :delight
   :config
   (setf (alist-get 'rustfmt apheleia-formatters)
-				'("rustfmt" "--quiet" "--emit" "stdout" "--edition" "2021"))
-	(setq-default indent-tabs-mode nil)
+	'("rustfmt" "--quiet" "--emit" "stdout" "--edition" "2021"))
+  (setq-default indent-tabs-mode nil)
   (apheleia-global-mode +1))
 
 (use-package corfu
@@ -614,7 +614,7 @@
   :config
   (setq lsp-ui-doc-header t)
   (setq lsp-ui-doc-include-signature t)
-                                        ;  (setq lsp-ui-doc-border (face-foreground 'default))
+  (setq lsp-ui-doc-border (face-foreground 'default))
   (setq lsp-ui-sideline-show-code-actions t)
   (setq lsp-ui-sideline-delay 0.05))
 

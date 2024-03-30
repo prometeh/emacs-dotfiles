@@ -293,10 +293,18 @@
   (global-tree-sitter-mode)
   :custom
   (treesit-extra-load-path (list (concat user-emacs-directory ".cache/var/straight/build/tree-sitter-langs/bin")))
+  (treesit-font-lock-level 4)
   :config
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 (use-package tree-sitter-langs)
+
+(use-package treesit-auto
+  :custom
+  (treesit-auto-install 'prompt)
+  :config
+  (treesit-auto-add-to-auto-mode-alist 'all)
+  (global-treesit-auto-mode))
 
 (use-package pdf-tools
   :magic ("%PDF" . pdf-view-mode)
@@ -727,6 +735,8 @@
   :init (setq markdown-command "marked"))
 
 (use-package rust-mode
+  :init
+  (setq rust-mode-treesitter-derive t)
   :hook
   (cargo-minor-mode)
   :config

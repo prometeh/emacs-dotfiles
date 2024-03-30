@@ -225,9 +225,9 @@
            :chat-model "codellama:latest"
            :embedding-model "codellama2:latest"))
   (setopt ellama-naming-provider
-	  (make-llm-ollama
-	   :chat-model "codellama:latest"
-	   :embedding-model "codellama:latest"))
+	        (make-llm-ollama
+	         :chat-model "codellama:latest"
+	         :embedding-model "codellama:latest"))
   (setopt ellama-naming-scheme 'ellama-generate-name-by-llm))
 
 (use-package multiple-cursors
@@ -324,7 +324,7 @@
 
 (use-package consult
   :bind (
-	 ("C-<backspace>" . consult-recent-file)
+	       ("C-<backspace>" . consult-recent-file)
          ("C-x b" . consult-buffer)
          ("M-y" . consult-yank-pop)
          ("<help> a" . consult-apropos)
@@ -404,7 +404,7 @@
   :delight
   :config
   (setf (alist-get 'rustfmt apheleia-formatters)
-	'("rustfmt" "--quiet" "--emit" "stdout" "--edition" "2021"))
+	      '("rustfmt" "--quiet" "--emit" "stdout" "--edition" "2021"))
   (setq-default indent-tabs-mode nil)
   (apheleia-global-mode +1))
 

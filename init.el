@@ -597,14 +597,15 @@
   (setq-local completion-at-point-functions (list (cape-capf-buster #'lsp-completion-at-point)))
   :hook (((mhtml-mode
            css-mode
-           java-mode       ; eclipse-jdtls
-           js-mode         ; ts-ls (tsserver wrapper)
-           js-jsx-mode     ; ts-ls (tsserver wrapper)
-           typescript-mode ; ts-ls (tsserver wrapper)
-           python-mode     ; pyright
-           rust-mode       ; rust-analyzer
-           web-mode        ; vue
-           dockerfile-mode ; docker
+           java-mode          ; eclipse-jdtls
+           js-mode            ; ts-ls (tsserver wrapper)
+           js-jsx-mode        ; ts-ls (tsserver wrapper)
+           typescript-ts-mode ; ts-ls (tsserver wrapper)
+           tsx-ts-mode        ; ts-ls (tsserver wrapper)
+           python-mode        ; pyright
+           rust-mode          ; rust-analyzer
+           web-mode           ; vue
+           dockerfile-mode    ; docker
            ) . lsp-deferred)
          (lsp-completion-mode . my/lsp-mode-setup-completion))
   :commands lsp

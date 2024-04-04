@@ -606,13 +606,12 @@
            rust-mode          ; rust-analyzer
            web-mode           ; vue
            dockerfile-mode    ; docker
-           ) . lsp-deferred)
+           )
+          . lsp-deferred)
          (lsp-completion-mode . my/lsp-mode-setup-completion))
   :commands lsp
   :custom (lsp-completion-provider :none) ; we use corfu
   :config
-  (setq lsp-auto-guess-root t)
-  (setq lsp-log-io nil)
   (setenv "TSSERVER_LOG_FILE"
           (expand-file-name ".cache/temp/lsp-log/tsserver.log" user-emacs-directory))
   (setq lsp-restart 'auto-restart)

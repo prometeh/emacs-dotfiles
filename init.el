@@ -577,6 +577,10 @@
   :bind
   ("C-x p t" . projectile-run-term))
 
+(use-package consult-projectile
+  :bind
+  ("M-s M-s" . consult-projectile))
+
 (use-package cargo)
 
 ;; programming supports

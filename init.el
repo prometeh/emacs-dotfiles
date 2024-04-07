@@ -308,6 +308,7 @@
 
 (use-package pdf-tools
   :magic ("%PDF" . pdf-view-mode)
+  :bind (("M-o" . pdf-outline))
   :config
   (pdf-tools-install :no-query))
 
@@ -619,7 +620,10 @@
   (setenv "TSSERVER_LOG_FILE"
           (expand-file-name ".cache/temp/lsp-log/tsserver.log" user-emacs-directory))
   (setq lsp-restart 'auto-restart)
-  (setq lsp-idle-delay 0.5))
+  (setq lsp-idle-delay 0.5)
+  (lsp-register-custom-settings
+   '(("typescript.format.indentSize" 2 t)
+     ("javascript.format.indentSize" 2 t))))
 
 (use-package lsp-ui
   :commands lsp-ui-mode
@@ -738,7 +742,7 @@
   (add-hook 'jtsx-typescript-mode-hook
             (lambda () (setq-local devdocs-current-docs '("typescript" "tailwindcss" "dom"))))
   (add-hook 'jtsx-tsx-mode-hook
-            (lambda () (setq-local devdocs-current-docs '("typescript" "react" "redux" "react_router" "tailwindcss" "dom"))))
+            (lambda () (setq-local devdocs-current-docs '("typescript" "react" "redux" "react_router" "tailwindcss" "dom" "html" "css"))))
 
   (defun jtsx-bind-keys-to-mode-map (mode-map)
     "Bind keys to MODE-MAP."
@@ -766,19 +770,11 @@
   (add-hook 'jtsx-tsx-mode-hook 'jtsx-bind-keys-to-jtsx-tsx-mode-map))
 
 
-;; (use-package typescript-mode
-;;   :mode (("\\.ts\\'" . typescript-mode))
-;;   :custom
-;;   (typescript-indent-level 2)
-;;   (typescript-ts-mode-indent-offset 2)
-;;   :config
-;;   (add-hook 'typescript-mode-hook
-;;             (lambda () (setq-local devdocs-current-docs '("typescript")))))
-
-
 (use-package emmet-mode
   :init
   (setq emmet-move-cursor-between-quotes t)
+  :custom
+  (emmet-indentation 2)
   :hook
   (mhtml-mode css-mode web-mode js-mode jtsx-jsx-mode jtsx-typescript-mode jtsx-tsx-mode))
 

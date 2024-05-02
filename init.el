@@ -14,7 +14,7 @@
 ;; Maximum number of bytes to read from a subprocess in a single chuck
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
 ;; Set the eln-cache path inside .cache directory
-                                        ;(setq native-comp-eln-load-path '("~/.config/emacs/.cache/temp/eln-cache/")); "/usr/lib/emacs/28.1/native-lisp/"))
+(setq native-comp-eln-load-path '("~/.config/emacs/.cache/temp/eln-cache/")); "/usr/lib/emacs/28.1/native-lisp/"))
 
 ;; Profile emacs startup
 (add-hook 'emacs-startup-hook

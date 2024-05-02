@@ -222,12 +222,12 @@
   (require 'llm-ollama)                 ; (suggestion: use container)
   (setopt ellama-provider
           (make-llm-ollama
-           :chat-model "codellama:latest"
-           :embedding-model "codellama2:latest"))
+           :chat-model "llama3:latest"
+           :embedding-model "llama3:latest"))
   (setopt ellama-naming-provider
 	        (make-llm-ollama
-	         :chat-model "codellama:latest"
-	         :embedding-model "codellama:latest"))
+           :chat-model "llama3:latest"
+	         :embedding-model "llama3:latest"))
   (setopt ellama-naming-scheme 'ellama-generate-name-by-llm))
 
 (use-package multiple-cursors

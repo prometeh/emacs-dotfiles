@@ -741,9 +741,9 @@
   (jtsx-enable-all-syntax-highlighting-features t)
   :config
   (add-hook 'jtsx-typescript-mode-hook
-            (lambda () (setq-local devdocs-current-docs '("typescript" "tailwindcss" "dom"))))
+            (lambda () (setq-local devdocs-current-docs '("typescript" "tailwindcss" "dom" "javascript"))))
   (add-hook 'jtsx-tsx-mode-hook
-            (lambda () (setq-local devdocs-current-docs '("typescript" "react" "redux" "react_router" "tailwindcss" "dom" "html" "css"))))
+            (lambda () (setq-local devdocs-current-docs '("typescript" "react" "redux" "react_router" "tailwindcss" "dom" "html" "css" "javascript"))))
 
   (defun jtsx-bind-keys-to-mode-map (mode-map)
     "Bind keys to MODE-MAP."

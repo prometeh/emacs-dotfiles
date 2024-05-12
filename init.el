@@ -584,39 +584,36 @@
 
 (use-package cargo)
 
+(use-package exercism)
+
 ;; programming supports
 
 (use-package lsp-mode
-  :init
-  (defun my/orderless-dispatch-flex-first (_pattern index _total)
-    (and (eq index 0) 'orderless-flex))
 
-  (defun my/lsp-mode-setup-completion ()
-    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-          '(orderless)))
-
-  ;; Optionally configure the first word as flex filtered.
-  (add-hook 'orderless-style-dispatchers #'my/orderless-dispatch-flex-first nil 'local)
-
-  ;; Optionally configure the cape-capf-buster.
-  (setq-local completion-at-point-functions (list (cape-capf-buster #'lsp-completion-at-point)))
   :hook (((mhtml-mode
-           css-mode
+           css-ts-mode
            java-mode          ; eclipse-jdtls
            js-mode            ; ts-ls (tsserver wrapper)
+           js-ts-mode         ; ts-ls (tsserver wrapper)
            js-jsx-mode        ; ts-ls (tsserver wrapper)
            typescript-ts-mode ; ts-ls (tsserver wrapper)
            tsx-ts-mode        ; ts-ls (tsserver wrapper)
            python-mode        ; pyright
-           rust-mode          ; rust-analyzer
+           rust-ts-mode          ; rust-analyzer
            web-mode           ; vue
            dockerfile-mode    ; docker
+           kotlin-ts-mode
            )
-          . lsp-deferred)
-         (lsp-completion-mode . my/lsp-mode-setup-completion))
+          . lsp)
+         (lsp-mode .lsp-enable-which-key-integration)
+         )
   :commands lsp
   :custom (lsp-completion-provider :none) ; we use corfu
   :config
+  ;; The path to lsp-mode needs to be added to load-path as well as the
+  ;; path to the `clients' subdirectory.
+  (add-to-list 'load-path (expand-file-name "lib/lsp-mode" user-emacs-directory))
+  (add-to-list 'load-path (expand-file-name "lib/lsp-mode/clients" user-emacs-directory))
   (setenv "TSSERVER_LOG_FILE"
           (expand-file-name ".cache/temp/lsp-log/tsserver.log" user-emacs-directory))
   (setq lsp-restart 'auto-restart)

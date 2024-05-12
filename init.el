@@ -622,6 +622,10 @@
    '(("typescript.format.indentSize" 2 t)
      ("javascript.format.indentSize" 2 t))))
 
+(use-package lsp-java)
+(use-package dap-mode
+  :after lsp-mode)
+
 (use-package lsp-ui
   :commands lsp-ui-mode
   :config
@@ -791,5 +795,8 @@
             (lambda () (setq-local devdocs-current-docs '("rust")))))
 
 (use-package yaml-mode)
+
+(use-package kotlin-ts-mode
+  :mode ("\\.kt\\'"))
 
 ;;; init.el ends here

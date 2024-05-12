@@ -777,7 +777,7 @@
   :custom
   (emmet-indentation 2)
   :hook
-  (mhtml-mode css-mode web-mode js-mode jtsx-jsx-mode jtsx-typescript-mode jtsx-tsx-mode))
+  (mhtml-mode css-mode css-ts-mode web-mode js-mode js-ts-mode jtsx-jsx-mode jtsx-typescript-mode jtsx-tsx-mode tsx-ts-mode))
 
 (use-package markdown-mode              ; Make sure that you have marked (npm i -g marked)
   :mode (("readme\\.md\\'" . gfm-mode)

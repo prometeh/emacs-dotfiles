@@ -3,7 +3,6 @@
 ;;; TODO: have a better description including minimum requirements
 ;;; TODO: make paths using user-emacs-directory
 ;;; TODO: make this org and refactor
-;;; TODO: fix yasnippet to be more friendly in auto-complete-mode
 ;;; TODO: optimize load-time
 ;;; This is my personal Emacs configuration
 ;;; Code:
@@ -515,6 +514,11 @@
 (use-package js-react-redux-yasnippets)
 
 (use-package yasnippet-snippets)
+
+(use-package yasnippet-capf
+  :after cape
+  :config
+  (add-to-list 'completion-at-point-functions #'yasnippet-capf))
 
 (use-package which-key
   :delight

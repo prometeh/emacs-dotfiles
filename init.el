@@ -219,14 +219,27 @@
 (use-package ellama                     ; ai in emacs, you need to have the
   :init                                 ; ollama plus the models in the config
   (require 'llm-ollama)                 ; (suggestion: use container)
+  (setopt ellama-providers
+		      '(("llama3.1" . (make-llm-ollama
+				                   :chat-model "llama3.1:latest"
+				                   :embedding-model "llama3.1:latest"))
+		        ("gemma2:27b" . (make-llm-ollama
+				                     :chat-model "gemma2:27b"
+				                     :embedding-model "gemma2:27b"))
+            ("qwen2.5:32b" . (make-llm-ollama
+				                      :chat-model "qwen2.5:32b"
+				                      :embedding-model "qwen2.5:32b"))
+		        ("phi3.5:latest" . (make-llm-ollama
+				                        :chat-model "phi3.5:latest"
+				                        :embedding-model "phi3.5:latest"))))
   (setopt ellama-provider
           (make-llm-ollama
-           :chat-model "llama3:latest"
-           :embedding-model "llama3:latest"))
+           :chat-model "llama3.1:latest"
+           :embedding-model "llama3.1:latest"))
   (setopt ellama-naming-provider
 	        (make-llm-ollama
-           :chat-model "llama3:latest"
-	         :embedding-model "llama3:latest"))
+           :chat-model "llama3.1:latest"
+	         :embedding-model "llama3.1:latest"))
   (setopt ellama-naming-scheme 'ellama-generate-name-by-llm))
 
 (use-package multiple-cursors

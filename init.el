@@ -7,6 +7,8 @@
 ;;; This is my personal Emacs configuration
 ;;; Code:
 
+;;  prevent package.el loading packages prior to their init-file loading.
+(setq package-enable-at-startup nil)
 
 ;; The size of allocated bytes for each garbage collection
 (setq gc-cons-threshold (* 100 1024 1024))   ;; 100mb, the default is 800 kilobytes
@@ -106,8 +108,11 @@
 ;; Bootstrap 'straight'
 (defvar bootstrap-version)
 (let ((bootstrap-file
-       (expand-file-name "straight/repos/straight.el/bootstrap.el" "~/.config/emacs/.cache/var/"))
-      (bootstrap-version 6))
+       (expand-file-name
+        "~/.config/emacs/.cache/var/straight/repos/straight.el/bootstrap.el"
+        (or (bound-and-true-p straight-base-dir)
+            user-emacs-directory)))
+      (bootstrap-version 7))
   (unless (file-exists-p bootstrap-file)
     (with-current-buffer
         (url-retrieve-synchronously
@@ -116,10 +121,10 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+
 ;; setting use-package to use straight
 (setq straight-use-package-by-default t)
-;; keeping emacs away from package in favor of straight
-                                        ;(setq package-enable-at-startup nil)
+
 ;; install 'use-package' with straight
 (straight-use-package 'use-package)
 
@@ -633,7 +638,7 @@
   (add-to-list 'load-path (expand-file-name "lib/lsp-mode/clients" user-emacs-directory))
   (setenv "TSSERVER_LOG_FILE"
           (expand-file-name ".cache/temp/lsp-log/tsserver.log" user-emacs-directory))
-  (setq lsp-restart 'auto-restart)
+
   (setq lsp-idle-delay 0.5)
   (lsp-register-custom-settings
    '(("typescript.format.indentSize" 2 t)

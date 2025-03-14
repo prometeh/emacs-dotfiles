@@ -622,24 +622,18 @@
            dockerfile-mode    ; docker
            kotlin-ts-mode
            )
-          . lsp)
-         (lsp-mode .lsp-enable-which-key-integration)
+          . lsp-deferred)
+         (lsp-mode . lsp-enable-which-key-integration)
          )
-  :commands lsp
-  ;; :custom (lsp-completion-provider :none) ; we use corfu
-  ;; :config
-  ;; ;; The path to lsp-mode needs to be added to load-path as well as the
-  ;; ;; path to the `clients' subdirectory.
-  ;; (add-to-list 'load-path (expand-file-name "lib/lsp-mode" user-emacs-directory))
-  ;; (add-to-list 'load-path (expand-file-name "lib/lsp-mode/clients" user-emacs-directory))
-  ;; (setenv "TSSERVER_LOG_FILE"
-  ;;         (expand-file-name ".cache/temp/lsp-log/tsserver.log" user-emacs-directory))
-
-  ;; (setq lsp-idle-delay 0.5)
-  ;; (lsp-register-custom-settings
-  ;;  '(("typescript.format.indentSize" 2 t)
-  ;;    ("javascript.format.indentSize" 2 t)))
-  )
+  :commands (lsp lsp-deferred)
+  :custom (lsp-completion-provider :none) ; we use corfu
+  :config
+  (add-to-list 'load-path (expand-file-name "lib/lsp-mode" user-emacs-directory))
+  (add-to-list 'load-path (expand-file-name "lib/lsp-mode/clients" user-emacs-directory))
+  (setq lsp-idle-delay 0.5)
+  (lsp-register-custom-settings
+   '(("typescript.format.indentSize" 2 t)
+     ("javascript.format.indentSize" 2 t))))
 
 (use-package lsp-java)
 (use-package dap-mode

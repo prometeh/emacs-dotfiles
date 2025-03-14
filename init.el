@@ -64,7 +64,7 @@
 ;; (global-linum-mode 1)                          ; set line numbers on globally
 (global-hl-line-mode 1)                        ; set the line highlighted
 (add-to-list 'default-frame-alist
-             '(font . "FiraCode Nerd Font Mono")) ; dont forget to add the nerd fonts
+             '(font . "FiraCode Nerd Font")) ; dont forget to add the nerd fonts
 
 (load-theme 'modus-vivendi)		; set the theme to modus-vivendi
 (column-number-mode 1)			; show the column number at modeline
@@ -224,28 +224,21 @@
 (use-package ellama                     ; ai in emacs, you need to have the
   :init                                 ; ollama plus the models in the config
   (require 'llm-ollama)                 ; (suggestion: use container)
-  (setopt ellama-providers
-		      '(("llama3.1" . (make-llm-ollama
-				                   :chat-model "llama3.1:latest"
-				                   :embedding-model "llama3.1:latest"))
-		        ("gemma2:27b" . (make-llm-ollama
-				                     :chat-model "gemma2:27b"
-				                     :embedding-model "gemma2:27b"))
-            ("qwen2.5:32b" . (make-llm-ollama
-				                      :chat-model "qwen2.5:32b"
-				                      :embedding-model "qwen2.5:32b"))
-		        ("phi3.5:latest" . (make-llm-ollama
-				                        :chat-model "phi3.5:latest"
-				                        :embedding-model "phi3.5:latest"))))
+  ;; (setopt ellama-providers
+  ;; 		      '(("deepseek-r1:32b" . (make-llm-ollama
+  ;; 				                          :chat-model "deepseek-r1:32b"
+  ;; 				                          :embedding-model "deepseek-r1:32b"))))
   (setopt ellama-provider
-          (make-llm-ollama
-           :chat-model "llama3.1:latest"
-           :embedding-model "llama3.1:latest"))
-  (setopt ellama-naming-provider
 	        (make-llm-ollama
-           :chat-model "llama3.1:latest"
-	         :embedding-model "llama3.1:latest"))
-  (setopt ellama-naming-scheme 'ellama-generate-name-by-llm))
+	         :chat-model "deepseek-r1:32b"
+	         :embedding-model "deepseek-r1:32b"))
+  ;; (setopt ellama-naming-provider
+  ;; 	  (make-llm-ollama
+  ;; 	   :chat-model "deepseek-r1:32b"
+  ;; 	   :embedding-model "deepseek-r1:32b"))
+
+  (setopt ellama-naming-scheme 'ellama-generate-name-by-llm)
+  )
 
 (use-package multiple-cursors
   :config
@@ -430,7 +423,7 @@
   :delight
   :config
   (setf (alist-get 'rustfmt apheleia-formatters)
-	      '("rustfmt" "--quiet" "--emit" "stdout" "--edition" "2021"))
+	      '("rustfmt" "--quiet" "--emit" "stdout" "--edition" "2024"))
   (setq-default indent-tabs-mode nil)
   (apheleia-global-mode +1))
 
@@ -449,6 +442,11 @@
   (corfu-preview-current nil)  ; default == 'insert
   :init
   (global-corfu-mode))
+
+(use-package corfu-terminal
+  :unless (display-graphic-p)
+  :init
+  (corfu-terminal-mode))
 
 (use-package cape
   ;; Bind dedicated completion commands
@@ -547,8 +545,6 @@
   :after lsp
   :hook lsp-mode)
 
-(use-package flycheck-rust)
-
 (use-package consult-flycheck
   :after (consult flycheck))
 
@@ -598,7 +594,7 @@
 
 (use-package projectile
   :bind
-  ("C-x p t" . projectile-run-term))
+  ("C-x p t" . projectile-run-vterm))
 
 (use-package consult-projectile
   :bind
@@ -630,19 +626,20 @@
          (lsp-mode .lsp-enable-which-key-integration)
          )
   :commands lsp
-  :custom (lsp-completion-provider :none) ; we use corfu
-  :config
-  ;; The path to lsp-mode needs to be added to load-path as well as the
-  ;; path to the `clients' subdirectory.
-  (add-to-list 'load-path (expand-file-name "lib/lsp-mode" user-emacs-directory))
-  (add-to-list 'load-path (expand-file-name "lib/lsp-mode/clients" user-emacs-directory))
-  (setenv "TSSERVER_LOG_FILE"
-          (expand-file-name ".cache/temp/lsp-log/tsserver.log" user-emacs-directory))
+  ;; :custom (lsp-completion-provider :none) ; we use corfu
+  ;; :config
+  ;; ;; The path to lsp-mode needs to be added to load-path as well as the
+  ;; ;; path to the `clients' subdirectory.
+  ;; (add-to-list 'load-path (expand-file-name "lib/lsp-mode" user-emacs-directory))
+  ;; (add-to-list 'load-path (expand-file-name "lib/lsp-mode/clients" user-emacs-directory))
+  ;; (setenv "TSSERVER_LOG_FILE"
+  ;;         (expand-file-name ".cache/temp/lsp-log/tsserver.log" user-emacs-directory))
 
-  (setq lsp-idle-delay 0.5)
-  (lsp-register-custom-settings
-   '(("typescript.format.indentSize" 2 t)
-     ("javascript.format.indentSize" 2 t))))
+  ;; (setq lsp-idle-delay 0.5)
+  ;; (lsp-register-custom-settings
+  ;;  '(("typescript.format.indentSize" 2 t)
+  ;;    ("javascript.format.indentSize" 2 t)))
+  )
 
 (use-package lsp-java)
 (use-package dap-mode
@@ -657,7 +654,16 @@
   (setq lsp-ui-sideline-show-code-actions t)
   (setq lsp-ui-sideline-delay 0.05))
 
+(use-package vterm)
+(use-package multi-vterm
+  :config
+  (setq multi-vterm-dedicated-window-height-percent 30)
+  :bind
+  ("C-c t t" . 'multi-vterm-dedicated-toggle)
+  ("C-c t n" . 'multi-vterm))
+
 (use-package lsp-tailwindcss
+  :after lsp-mode
   :init
   (setq lsp-tailwindcss-add-on-mode t))
 
@@ -677,12 +683,16 @@
 (use-package impatient-mode
   :hook mhtml-mode web-mode css-mode js2-mode)
 
-(use-package origami
+(use-package treesit-fold
+
   :config
-  (global-origami-mode 1)
+  (global-treesit-fold-mode 1)
+  ;; (global-treesit-fold-indicators-mode 1)
+  (push '(jsx_element . treesit-fold-range-html) (alist-get 'tsx-ts-mode treesit-fold-range-alist))
   :bind
-  ("C-c C-<return>" . 'origami-toggle-node)
-  ("C-c C-c C-<return>" . 'origami-toggle-all-nodes))
+  ("C-c C-<return>" . 'treesit-fold-toggle))
+
+
 
 (use-package citre
   :defer t
@@ -739,59 +749,7 @@
   (js-indent-level 2)
   (js2-basic-offset 2)
   (js2-highlight-level 3)
-  (tab-width 2)
-  )
-
-(use-package jtsx
-  :mode (("\\.jsx?\\'" . jtsx-jsx-mode)
-         ("\\.tsx\\'" . jtsx-tsx-mode)
-         ("\\.ts\\'" . jtsx-typescript-mode))
-  :commands jtsx-install-treesit-language
-  :hook ((jtsx-jsx-mode . hs-minor-mode)
-         (jtsx-tsx-mode . hs-minor-mode)
-         (jtsx-typescript-mode . hs-minor-mode))
-  :custom
-  ;; Optional customizations
-  (js-indent-level 2)
-  (typescript-ts-mode-indent-offset 2)
-  (jtsx-switch-indent-offset 0)
-  (jtsx-indent-statement-block-regarding-standalone-parent nil)
-  (jtsx-jsx-element-move-allow-step-out t)
-  (jtsx-enable-jsx-electric-closing-element t)
-  (jtsx-enable-electric-open-newline-between-jsx-element-tags t)
-  (jtsx-enable-jsx-element-tags-auto-sync nil)
-  (jtsx-enable-all-syntax-highlighting-features t)
-  :config
-  (add-hook 'jtsx-typescript-mode-hook
-            (lambda () (setq-local devdocs-current-docs '("typescript" "tailwindcss" "dom" "javascript"))))
-  (add-hook 'jtsx-tsx-mode-hook
-            (lambda () (setq-local devdocs-current-docs '("typescript" "react" "redux" "react_router" "tailwindcss" "dom" "html" "css" "javascript"))))
-
-  (defun jtsx-bind-keys-to-mode-map (mode-map)
-    "Bind keys to MODE-MAP."
-    (define-key mode-map (kbd "C-c C-j") 'jtsx-jump-jsx-element-tag-dwim)
-    (define-key mode-map (kbd "C-c j o") 'jtsx-jump-jsx-opening-tag)
-    (define-key mode-map (kbd "C-c j c") 'jtsx-jump-jsx-closing-tag)
-    (define-key mode-map (kbd "C-c j r") 'jtsx-rename-jsx-element)
-    (define-key mode-map (kbd "C-c <down>") 'jtsx-move-jsx-element-tag-forward)
-    (define-key mode-map (kbd "C-c <up>") 'jtsx-move-jsx-element-tag-backward)
-    (define-key mode-map (kbd "C-c C-<down>") 'jtsx-move-jsx-element-forward)
-    (define-key mode-map (kbd "C-c C-<up>") 'jtsx-move-jsx-element-backward)
-    (define-key mode-map (kbd "C-c C-S-<down>") 'jtsx-move-jsx-element-step-in-forward)
-    (define-key mode-map (kbd "C-c C-S-<up>") 'jtsx-move-jsx-element-step-in-backward)
-    (define-key mode-map (kbd "C-c j w") 'jtsx-wrap-in-jsx-element)
-    (define-key mode-map (kbd "C-c j u") 'jtsx-unwrap-jsx)
-    (define-key mode-map (kbd "C-c j d") 'jtsx-delete-jsx-node))
-
-  (defun jtsx-bind-keys-to-jtsx-jsx-mode-map ()
-    (jtsx-bind-keys-to-mode-map jtsx-jsx-mode-map))
-
-  (defun jtsx-bind-keys-to-jtsx-tsx-mode-map ()
-    (jtsx-bind-keys-to-mode-map jtsx-tsx-mode-map))
-
-  (add-hook 'jtsx-jsx-mode-hook 'jtsx-bind-keys-to-jtsx-jsx-mode-map)
-  (add-hook 'jtsx-tsx-mode-hook 'jtsx-bind-keys-to-jtsx-tsx-mode-map))
-
+  (tab-width 2))
 
 (use-package emmet-mode
   :init
@@ -821,4 +779,31 @@
 (use-package kotlin-ts-mode
   :mode ("\\.kt\\'"))
 
+(use-package hyprlang-ts-mode)
+(use-package indent-bars
+  :custom
+  (indent-bars-treesit-support t)
+  (indent-bars-treesit-wrap '((rust arguments parameters)))
+  (indent-bars-treesit-scope '((rust trait_item impl_item
+                                     macro_definition macro_invocation
+                                     struct_item enum_item mod_item
+                                     const_item let_declaration
+                                     function_item for_expression
+                                     if_expression loop_expression
+                                     while_expression match_expression
+                                     match_arm call_expression
+                                     token_tree token_tree_pattern
+                                     token_repetition)))
+  :config
+  (setq
+   indent-bars-prefer-character t
+   indent-bars-color '(highlight :face-bg t :blend 0.5)
+   indent-bars-pattern "."
+   indent-bars-width-frac 0.1
+   indent-bars-pad-frac 0.1
+   indent-bars-zigzag nil
+   indent-bars-color-by-depth '(:regexp "outline-\\([0-9]+\\)" :blend 1) ; blend=1: blend with BG only
+   indent-bars-highlight-current-depth '(:blend 0.2) ; pump up the BG blend on current
+   indent-bars-display-on-blank-lines t)
+  :hook (prog-mode . indent-bars-mode))
 ;;; init.el ends here
